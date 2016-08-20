@@ -1,0 +1,28 @@
+{
+    "name": "rbltracker/sdk",
+    "type": "library",
+    "description": "A PHP wrapper for the RBLTracker API",
+    "keywords": ["rbltracker","dns", "api"],
+    "homepage": "https://rbltracker.com",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/rbltracker/rbltracker-php/issues",
+        "source": "https://github.com/rbltracker/rbltracker-php"
+    },
+    "authors": [
+        {
+            "name": "Mike Pultz",
+            "email": "mike@mikepultz.com",
+            "homepage": "http://mikepultz.com/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "RBLTracker\\": "RBLTracker/"
+        }
+    }
+}
