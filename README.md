@@ -14,7 +14,7 @@ You can install **rbltracker-php** via composer or by downloading the source.
 ```php
 <?php
 
-$client = new RBLTracker\Client(< RBLTracker API Token');
+$client = new RBLTracker\Client(< RBLTracker API Token >);
 
 try
 {
