@@ -21,6 +21,11 @@ spl_autoload_register('RBLTracker\Client::autoload');
 class Client
 {
     //
+    // current version of this library
+    //
+    const VERSION = '1.0.0';
+
+    //
     // the API key
     //
     protected $m_api_token = null;
