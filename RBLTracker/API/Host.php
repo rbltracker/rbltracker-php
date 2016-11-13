@@ -20,17 +20,17 @@ class Host
     //
     // constructor to copy over the API key
     //
-    public function __construct($_api_token)
+    public function __construct($_account_sid, $_api_token)
     {
-        $this->api_token($_api_token);
+        $this->auth($_account_sid, $_api_token);
     }
 
     //
     // get a single host by id
     //
-    public function get($_host_id)
+    public function get($_object_id)
     {
-        return $this->_get('host', array('id' => $_host_id));
+        return $this->_get('host/' . $_object_id);
     }
 
     //
@@ -44,32 +44,32 @@ class Host
     //
     // update a host
     //
-    public function update($_host_id, array $_settings)
+    public function update($_object_id, array $_settings)
     {
-        return $this->_post('host/update', array_merge(array('id' => $_host_id), $_settings));
+        return $this->_post('host/update/' . $_object_id, $_settings);
     }
 
     //
     // delete a host by id
     //
-    public function delete($_host_id)
+    public function delete($_object_id)
     {
-        return $this->_post('host/delete', array('id' => $_host_id));
+        return $this->_post('host/delete/' . $_object_id);
     }
 
     //
     // pause a host by id
     //
-    public function pause($_host_id)
+    public function pause($_object_id)
     {
-        return $this->_post('host/pause', array('id' => $_host_id));
+        return $this->_post('host/pause/' . $_object_id);
     }
 
     //
     // resume (un-pause) a host by id
     //
-    public function resume($_host_id)
+    public function resume($_object_id)
     {
-        return $this->_post('host/resume', array('id' => $_host_id));
+        return $this->_post('host/resume/' . $_object_id);
     }
 }

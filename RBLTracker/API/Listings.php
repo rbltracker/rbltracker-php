@@ -20,9 +20,9 @@ class Listings
     //
     // constructor to copy over the API key
     //
-    public function __construct($_api_token)
+    public function __construct($_account_sid, $_api_token)
     {
-        $this->api_token($_api_token);
+        $this->auth($_account_sid, $_api_token);
     }
 
     //

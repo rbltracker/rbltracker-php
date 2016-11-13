@@ -14,7 +14,7 @@ You can install **rbltracker-php** via composer or by downloading the source.
 ```php
 <?php
 
-$client = new RBLTracker\Client(< RBLTracker API Token');
+$client = new RBLTracker\Client('your_account_sid', 'your_auth_token');
 
 try
 {
@@ -37,84 +37,41 @@ Array
 (
     [status_code] => 200
     [status_message] => Ok
-    [total_hosts] => 8
-    [total_listed] => 0
-    [page] => 2
-    [total_pages] => 2
-    [page_size] => 5
+    [total_hosts] => 1
+    [total_listed] => 1
+    [page] => 1
+    [total_pages] => 1
+    [page_size] => 20
     [data] => Array
         (
             [0] => Array
                 (
-                    [id] => HTa370ecd34e7d9eb124d1b3617afafaf8
-                    [host] => fonolo.com
-                    [name] => Fonolo
+                    [id] => HTee06c4fa7c23aa8a3a4e8d66922b0834
+                    [host] => bad-url.com
+                    [name] => bad-url.com
                     [type] => uribl
                     [parent] => 
                     [status] => active
-                    [last_checked] => 2016-07-20 09:02:18 EDT
-                    [first_blocked] => 
-                    [first_listed] => 
-                    [block_period] => 
-                    [listed_period] => 
-                    [blocked] => 0
-                    [listed] => 0
-                    [listed_count] => 0
+                    [rbl_profile] => RP15d4e891d784977cacbfcbb00c48f133
+                    [contact_group] => CGd3dca251d33135e0a518d7c49b89dc61
+                    [last_checked] => 2016-11-07 21:01:33 EST
+                    [first_listed] => 2016-11-06 10:14:58 EST
+                    [listed_period] => 1 day 11:37:51
+                    [listed] => 1
+                    [listed_count] => 1
                     [listed_details] => Array
                         (
+                            [0] => Array
+                                (
+                                    [host] => Google Safe Browsing
+                                    [website] => 
+                                    [details] => Malware (Virus) on Windows
+                                )
                         )
-
                 )
-
-            [1] => Array
-                (
-                    [id] => HTf4e4796f608db1e3edf95c4bc19b3fc9
-                    [host] => mrhost.ca
-                    [name] => Mr.Host Website
-                    [type] => uribl
-                    [parent] => 
-                    [status] => active
-                    [last_checked] => 2016-07-20 09:00:59 EDT
-                    [first_blocked] => 
-                    [first_listed] => 
-                    [block_period] => 
-                    [listed_period] => 
-                    [blocked] => 0
-                    [listed] => 0
-                    [listed_count] => 0
-                    [listed_details] => Array
-                        (
-                        )
-
-                )
-
-            [2] => Array
-                (
-                    [id] => HTbd7fe63ba673506575158fdd7a7d33b9
-                    [host] => rbltracker.com
-                    [name] => RBLTracker Site
-                    [type] => uribl
-                    [parent] => 
-                    [status] => active
-                    [last_checked] => 2016-07-20 09:01:23 EDT
-                    [first_blocked] => 
-                    [first_listed] => 
-                    [block_period] => 
-                    [listed_period] => 
-                    [blocked] => 0
-                    [listed] => 0
-                    [listed_count] => 0
-                    [listed_details] => Array
-                        (
-                        )
-
-                )
-
         )
-
-    [version] => 3.1
+    [version] => 3.4
 )
-
 ```
 
 ## Documentation

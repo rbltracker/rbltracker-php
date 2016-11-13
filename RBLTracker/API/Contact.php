@@ -20,17 +20,17 @@ class Contact
     //
     // constructor to copy over the API key
     //
-    public function __construct($_api_token)
+    public function __construct($_account_sid, $_api_token)
     {
-        $this->api_token($_api_token);
+        $this->auth($_account_sid, $_api_token);
     }
 
     //
     // get a single contact by id
     //
-    public function get($_contact_id)
+    public function get($_object_id)
     {
-        return $this->_get('contact', array('id' => $_contact_id));
+        return $this->_get('contact/' . $_object_id);
     }
 
     //
@@ -44,48 +44,48 @@ class Contact
     //
     // update a contact
     //
-    public function update($_contact_id, array $_settings)
+    public function update($_object_id, array $_settings)
     {
-        return $this->_post('contact/update', array_merge(array('id' => $_contact_id), $_settings));
+        return $this->_post('contact/update/' . $_object_id, $_settings);
     }
 
     //
     // delete a contact by id
     //
-    public function delete($_contact_id)
+    public function delete($_object_id)
     {
-        return $this->_post('contact/delete', array('id' => $_contact_id));
+        return $this->_post('contact/delete/' . $_object_id);
     }
 
     //
     // pause a contact by id
     //
-    public function pause($_contact_id)
+    public function pause($_object_id)
     {
-        return $this->_post('contact/pause', array('id' => $_contact_id));
+        return $this->_post('contact/pause/' . $_object_id);
     }
 
     //
     // resume (un-pause) a contact by id
     //
-    public function resume($_contact_id)
+    public function resume($_object_id)
     {
-        return $this->_post('contact/resume', array('id' => $_contact_id));
+        return $this->_post('contact/resume/' . $_object_id);
     }
 
     //
     // resend and authorization code for a contact by id
     //
-    public function resend($_contact_id)
+    public function resend($_object_id)
     {
-        return $this->_post('contact/resend', array('id' => $_contact_id));
+        return $this->_post('contact/resend/' . $_object_id);
     }
 
     //
     // confirm a contact by id
     //
-    public function confirm($_contact_id, $_auth_code)
+    public function confirm($_object_id, $_auth_code)
     {
-        return $this->_post('contact/confirm', array('id' => $_contact_id, 'authcode' => $_auth_code));
+        return $this->_post('contact/confirm/' . $_object_id, array('authcode' => $_auth_code));
     }
 }
