@@ -1,6 +1,6 @@
 <a href="https://rbltracker.com" target="_blank"><img src="https://rbltracker.com/portal/static/3.4/images/rbl_logo_front.png"/></a>
 
-[Sign up][rbltracker sign up] for a RBLTracker account and visit our [Developer Site](https://rbltracker.com/docs/api/) for even more details.
+[Sign up][rbltracker sign up] for a RBLTracker account and visit our [developer site][rbltracker dev site] for even more details.
 
 # PHP Client Library
 
@@ -90,9 +90,7 @@ Array
 
 ## Documentation
 
-Full API documentation is available here:
-
-    https://rbltracker.com/docs/api/
+Full API documentation is available from the [RBLTracker developer site.][rbltracker dev site]
 
 ## Release History
 
@@ -100,3 +98,4 @@ Full API documentation is available here:
 * 1.0.0 - Initial release
 
 [rbltracker sign up]:   https://rbltracker.com/portal/signup/
+[rbltracker dev site]:  https://rbltracker.com/docs/api/
