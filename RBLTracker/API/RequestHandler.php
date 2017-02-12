@@ -15,18 +15,14 @@ use RBLTracker\Exceptions\RBLTrackerException;
 
 trait RequestHandler
 {
-    private $m_account_sid  = null;
-    private $m_api_token    = null;
-    private $m_url          = 'https://rbltracker.com/api/';
-    private $m_format       = 'json';
+    private $m_client = null;
 
     //
-    // set the api token
+    // init a new object
     //
-    protected function auth($_account_sid, $_api_token)
+    protected function init(\RBLTracker\Client $_client)
     {
-        $this->m_account_sid    = $_account_sid;
-        $this->m_api_token      = $_api_token;
+        $this->m_client = $_client;
     }
 
     //
@@ -39,10 +35,10 @@ trait RequestHandler
         //
         if (is_null($_args) == false)
         {
-            return $this->m_url . $_action . '.' . $this->m_format . '?' . http_build_query($_args);
+            return $this->m_client->url() . $_action . '.json' . '?' . http_build_query($_args);
         } else
         {
-            return $this->m_url . $_action . '.' . $this->m_format;
+            return $this->m_client->url() . $_action . '.json';
         }
     }
 
@@ -87,17 +83,25 @@ trait RequestHandler
 
             curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 5);
             curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($c, CURLOPT_USERPWD, $this->m_account_sid . ':' . $this->m_api_token);
+            curl_setopt($c, CURLOPT_USERPWD, $this->m_client->account_sid() . ':' . $this->m_client->api_token());
+
+            //
+            // add additional custom CURL opts
+            //
+            if ( (is_null($this->m_client->m_curl_opts) == false) && (count($this->m_client->m_curl_opts) > 0) )
+            {
+                curl_setopt_array($c, $this->m_client->m_curl_opts);
+            }
 
             //
             // make the request
             //
             $response  = curl_exec($c);
-            
+
             //
             // shutdown CURL
             //
-            curl_close($c);            
+            curl_close($c);
 
             //
             // validate the response data
@@ -126,7 +130,7 @@ trait RequestHandler
                         'header'    => array(
 
                             'Content-type: application/x-www-form-urlencoded',
-                            'Authorization: Basic ' . base64_encode($this->m_account_sid . ':' . $this->m_api_token)
+                            'Authorization: Basic ' . base64_encode($this->m_client->account_sid() . ':' . $this->m_client->api_token())
                         ),
                         'content'   => (is_null($_args) == true) ? '' : http_build_query($_args),
                     )
@@ -154,7 +158,7 @@ trait RequestHandler
                         'method'    => 'GET',
                         'header'    => array(
 
-                            'Authorization: Basic ' . base64_encode($this->m_account_sid . ':' . $this->m_api_token)
+                            'Authorization: Basic ' . base64_encode($this->m_client->account_sid() . ':' . $this->m_client->api_token())
                         )
                     )
                 );

@@ -18,11 +18,11 @@ class Listings
     use RequestHandler;
 
     //
-    // constructor to copy over the API key
+    // constructor to copy over the client details
     //
-    public function __construct($_account_sid, $_api_token)
+    public function __construct(\RBLTracker\Client $_client)
     {
-        $this->auth($_account_sid, $_api_token);
+        $this->init($_client);
     }
 
     //

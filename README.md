@@ -94,8 +94,13 @@ Full API documentation is available from the [RBLTracker developer site.][rbltra
 
 ## Release History
 
-* 1.0.1 - updated to support the RBLTracker API v3.4
-* 1.0.0 - Initial release
+* 1.0.2 - updated to support the RBLTracker API v3.6
+        - added manual RBL check support.
+        - refactored the code layout to make it easier to override the URL for testing.
+
+* 1.0.1 - updated to support the RBLTracker API v3.4.
+
+* 1.0.0 - Initial release.
 
 [rbltracker sign up]:   https://rbltracker.com/portal/signup/
 [rbltracker dev site]:  https://rbltracker.com/docs/api/

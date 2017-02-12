@@ -23,13 +23,23 @@ class Client
     //
     // PHP SDK version
     //
-    const VERSION = '1.0.1';
+    const VERSION = '1.0.2';
 
     //
     // the API key
     //
-    protected $m_account_sid = null;
-    protected $m_api_token = null;
+    private $m_account_sid = null;
+    private $m_api_token = null;
+
+    //
+    // the request URL
+    //
+    private $m_url = 'https://rbltracker.com/api/';
+
+    //
+    // additional CURL opts
+    //
+    public $m_curl_opts = array();
 
     //
     // init the object and set the API token
@@ -48,8 +58,8 @@ class Client
             throw new RBLTrackerException('invalid API access token provided.');
         }
 
-        $this->m_account_sid    = $_account_sid;
-        $this->m_api_token      = $_api_token;
+        $this->account_sid($_account_sid);
+        $this->api_token($_api_token);
     }
 
     //
@@ -61,6 +71,48 @@ class Client
         {
             require_once str_replace('\\', '/', $_name) . '.php';
         }
+    }
+
+    //
+    // get/set internal values
+    //
+    public function account_sid($_account_sid = null)
+    {
+        if (is_null($_account_sid) == true)
+        {
+            return $this->m_account_sid;
+        } else
+        {
+            $this->m_account_sid = $_account_sid;
+        }
+    }
+    public function api_token($_api_token = null)
+    {
+        if (is_null($_api_token) == true)
+        {
+            return $this->m_api_token;
+        } else
+        {
+            $this->m_api_token = $_api_token;
+        }
+    }
+    public function url($_url = null)
+    {
+        if (is_null($_url) == true)
+        {
+            return $this->m_url;
+        } else
+        {
+            $this->m_url = $_url;
+        }
+    }
+
+    //
+    // here to support adding additional custom curl opts
+    //
+    public function curl_opts(array $_opts = null)
+    {
+        $this->m_curl_opts = $_opts;
     }
 
     //
@@ -83,7 +135,7 @@ class Client
     //
     public function get_listings()
     {
-        return new API\Listings($this->m_account_sid, $this->m_api_token);
+        return new API\Listings($this);
     }
     
     //
@@ -91,11 +143,11 @@ class Client
     //
     public function get_host()
     {
-        return new API\Host($this->m_account_sid, $this->m_api_token);
+        return new API\Host($this);
     }
     public function get_hosts()
     {
-        return new API\Hosts($this->m_account_sid, $this->m_api_token);
+        return new API\Hosts($this);
     }
 
     //
@@ -103,11 +155,11 @@ class Client
     //
     public function get_contact()
     {
-        return new API\Contact($this->m_account_sid, $this->m_api_token);
+        return new API\Contact($this);
     }
     public function get_contacts()
     {
-        return new API\Contacts($this->m_account_sid, $this->m_api_token);
+        return new API\Contacts($this);
     }
 
     //
@@ -115,11 +167,11 @@ class Client
     //
     public function get_rbl()
     {
-        return new API\RBL($this->m_account_sid, $this->m_api_token);
+        return new API\RBL($this);
     }
     public function get_rbls()
     {
-        return new API\RBLs($this->m_account_sid, $this->m_api_token);
+        return new API\RBLs($this);
     }
 
     //
@@ -127,11 +179,11 @@ class Client
     //
     public function get_rbl_profile()
     {
-        return new API\RBL_Profile($this->m_account_sid, $this->m_api_token);
+        return new API\RBL_Profile($this);
     }
     public function get_rbl_profiles()
     {
-        return new API\RBL_Profiles($this->m_account_sid, $this->m_api_token);
+        return new API\RBL_Profiles($this);
     }
 
     //
@@ -139,10 +191,18 @@ class Client
     //
     public function get_contact_group()
     {
-        return new API\Contact_Group($this->m_account_sid, $this->m_api_token);
+        return new API\Contact_Group($this);
     }
     public function get_contact_groups()
     {
-        return new API\Contact_Groups($this->m_account_sid, $this->m_api_token);
+        return new API\Contact_Groups($this);
+    }
+
+    //
+    // return a new check object
+    //
+    public function get_check()
+    {
+        return new API\Check($this);
     }
 }

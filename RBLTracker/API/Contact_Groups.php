@@ -20,9 +20,9 @@ class Contact_Groups
     //
     // constructor to copy over the API key
     //
-    public function __construct($_account_sid, $_api_token)
+    public function __construct(\RBLTracker\Client $_client)
     {
-        $this->auth($_account_sid, $_api_token);
+        $this->init($_client);
     }
 
     //
