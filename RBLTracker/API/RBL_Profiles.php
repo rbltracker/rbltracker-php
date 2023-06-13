@@ -13,7 +13,7 @@ namespace RBLTracker\API;
 
 use RBLTracker\Exceptions\RBLTrackerException;
 
-class RBL_Profiles
+final class RBL_Profiles
 {
     use RequestHandler;
 

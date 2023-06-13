@@ -18,12 +18,12 @@ use RBLTracker\Exceptions\RBLTrackerException;
 //
 spl_autoload_register('RBLTracker\Client::autoload');
 
-class Client
+final class Client
 {
     //
     // PHP SDK version
     //
-    const VERSION = '1.0.2';
+    const VERSION = '1.0.3';
 
     //
     // the API key
@@ -39,7 +39,7 @@ class Client
     //
     // additional CURL opts
     //
-    public $m_curl_opts = array();
+    public $m_curl_opts = [];
 
     //
     // init the object and set the API token

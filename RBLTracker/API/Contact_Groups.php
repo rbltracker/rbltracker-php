@@ -13,7 +13,7 @@ namespace RBLTracker\API;
 
 use RBLTracker\Exceptions\RBLTrackerException;
 
-class Contact_Groups
+final class Contact_Groups
 {
     use RequestHandler;
 

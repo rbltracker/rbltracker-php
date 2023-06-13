@@ -63,10 +63,10 @@ trait RequestHandler
             {
                 curl_setopt($c, CURLOPT_URL, $this->build_url($_action));
                 curl_setopt($c, CURLOPT_POST, true);
-                curl_setopt($c, CURLOPT_HTTPHEADER, array(
+                curl_setopt($c, CURLOPT_HTTPHEADER, [
 
                     'Content-type'  => 'application/x-www-form-urlencoded'
-                ));
+                ]);
 
                 //
                 // if there are args
@@ -124,22 +124,25 @@ trait RequestHandler
                 //
                 // build the opts
                 //
-                $opts = array('http' =>
-                    array(
+                $opts = [
+ 
+                    'http' => [
+
                         'method'    => 'POST',
-                        'header'    => array(
+                        'header'    => [
 
                             'Content-type: application/x-www-form-urlencoded',
                             'Authorization: Basic ' . base64_encode($this->m_client->account_sid() . ':' . $this->m_client->api_token())
-                        ),
+                        ],
                         'content'   => (is_null($_args) == true) ? '' : http_build_query($_args),
-                    )
-                );
+                    ]
+                ];
 
                 //
                 // make the request
                 //
                 $response = file_get_contents($this->build_url($_action), false, stream_context_create($opts));
+
                 if ( ($response === false) || (strlen($response) == 0) )
                 {
                     throw new RBLTrackerException('failed to make request to RBLTracker API');
@@ -153,20 +156,23 @@ trait RequestHandler
                 //
                 // build the opts
                 //
-                $opts = array('http' =>
-                    array(
+                $opts = [ 
+
+                    'http' => [
+
                         'method'    => 'GET',
-                        'header'    => array(
+                        'header'    => [
 
                             'Authorization: Basic ' . base64_encode($this->m_client->account_sid() . ':' . $this->m_client->api_token())
-                        )
-                    )
-                );
+                        ]
+                    ]
+                ];
 
                 //
                 // make the request
                 //
                 $response = file_get_contents($this->build_url($_action, $_args), false, stream_context_create($opts));
+
                 if ( ($response === false) || (strlen($response) == 0) )
                 {
                     throw new RBLTrackerException('failed to make request to RBLTracker API');

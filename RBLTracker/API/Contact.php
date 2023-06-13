@@ -13,7 +13,7 @@ namespace RBLTracker\API;
 
 use RBLTracker\Exceptions\RBLTrackerException;
 
-class Contact
+final class Contact
 {
     use RequestHandler;
 
@@ -86,6 +86,6 @@ class Contact
     //
     public function confirm($_object_id, $_auth_code)
     {
-        return $this->_post('contact/confirm/' . $_object_id, array('authcode' => $_auth_code));
+        return $this->_post('contact/confirm/' . $_object_id, [ 'authcode' => $_auth_code ]);
     }
 }

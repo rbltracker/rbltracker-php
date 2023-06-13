@@ -32,7 +32,7 @@ $client = new RBLTracker\Client('your_account_sid', 'your_auth_token');
 
 try
 {
-    $hosts = $client->hosts->get(array('page_size' => 5, 'page' => 2));
+    $hosts = $client->hosts->get([ 'page_size' => 5, 'page' => 2 ]);
 
     print_r($hosts);
 
@@ -41,7 +41,6 @@ try
     echo $e->getMessage();
 }
 
-?>
 ```
 
 That will output a PHP array that looks like this:
@@ -93,6 +92,11 @@ Array
 Full API documentation is available from the [RBLTracker developer site.][rbltracker dev site]
 
 ## Release History
+
+### v1.0.3
+* fixed a typo in RBLTrackerException.php where it was using short open tags.
+* changed array() instances to [].
+* updated classes to use the final keyword.
 
 ### v1.0.2
 * updated to support the RBLTracker API v3.6

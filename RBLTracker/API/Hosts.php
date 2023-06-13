@@ -13,7 +13,7 @@ namespace RBLTracker\API;
 
 use RBLTracker\Exceptions\RBLTrackerException;
 
-class Hosts
+final class Hosts
 {
     use RequestHandler;
 
