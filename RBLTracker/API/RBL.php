@@ -1,4 +1,4 @@
-<?php 
+<?php declare(strict_types=1);
 
 //    
 // This file is part of the RBLTracker PHP Wrapper package.
@@ -13,7 +13,7 @@ namespace RBLTracker\API;
 
 use RBLTracker\Exceptions\RBLTrackerException;
 
-class RBL
+final class RBL
 {
     use RequestHandler;
 
@@ -28,7 +28,7 @@ class RBL
     //
     // get a single rbl by id
     //
-    public function get($_object_id)
+    public function get(string $_object_id): array
     {
         return $this->_get('rbl/' . $_object_id);
     }
@@ -36,7 +36,7 @@ class RBL
     //
     // create an rbl
     //
-    public function add(array $_settings)
+    public function add(array $_settings): array
     {
         return $this->_post('rbl/add', $_settings);
     }
@@ -44,7 +44,7 @@ class RBL
     //
     // update an rbl
     //
-    public function update($_object_id, array $_settings)
+    public function update(string $_object_id, array $_settings): array
     {
         return $this->_post('rbl/update/' . $_object_id, $_settings);
     }
@@ -52,7 +52,7 @@ class RBL
     //
     // delete an rbl by id
     //
-    public function delete($_object_id)
+    public function delete(string $_object_id): array
     {
         return $this->_post('rbl/delete/' . $_object_id);
     }
@@ -60,7 +60,7 @@ class RBL
     //
     // pause an rbl by id
     //
-    public function pause($_object_id)
+    public function pause(string $_object_id): array
     {
         return $this->_post('rbl/pause/' . $_object_id);
     }
@@ -68,7 +68,7 @@ class RBL
     //
     // resume (un-pause) an rbl by id
     //
-    public function resume($_object_id)
+    public function resume(string $_object_id): array
     {
         return $this->_post('rbl/resume/' . $_object_id);
     }

@@ -1,4 +1,4 @@
-<?php 
+<?php declare(strict_types=1);
 
 //    
 // This file is part of the RBLTracker PHP Wrapper package.
@@ -13,7 +13,7 @@ namespace RBLTracker\API;
 
 use RBLTracker\Exceptions\RBLTrackerException;
 
-class Host
+final class Host
 {
     use RequestHandler;
 
@@ -28,7 +28,7 @@ class Host
     //
     // get a single host by id
     //
-    public function get($_object_id)
+    public function get(string $_object_id): array
     {
         return $this->_get('host/' . $_object_id);
     }
@@ -36,7 +36,7 @@ class Host
     //
     // create a host
     //
-    public function add(array $_settings)
+    public function add(array $_settings): array
     {
         return $this->_post('host/add', $_settings);
     }
@@ -44,7 +44,7 @@ class Host
     //
     // update a host
     //
-    public function update($_object_id, array $_settings)
+    public function update(string $_object_id, array $_settings): array
     {
         return $this->_post('host/update/' . $_object_id, $_settings);
     }
@@ -52,7 +52,7 @@ class Host
     //
     // delete a host by id
     //
-    public function delete($_object_id)
+    public function delete(string $_object_id): array
     {
         return $this->_post('host/delete/' . $_object_id);
     }
@@ -60,7 +60,7 @@ class Host
     //
     // pause a host by id
     //
-    public function pause($_object_id)
+    public function pause(string $_object_id): array
     {
         return $this->_post('host/pause/' . $_object_id);
     }
@@ -68,7 +68,7 @@ class Host
     //
     // resume (un-pause) a host by id
     //
-    public function resume($_object_id)
+    public function resume(string $_object_id): array
     {
         return $this->_post('host/resume/' . $_object_id);
     }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 //
 // This file is part of the RBLTracker PHP Wrapper package.
@@ -15,12 +15,12 @@ use RBLTracker\Exceptions\RBLTrackerException;
 
 trait RequestHandler
 {
-    private $m_client = null;
+    private \RBLTracker\Client $m_client;
 
     //
     // init a new object
     //
-    protected function init(\RBLTracker\Client $_client)
+    protected function init(\RBLTracker\Client $_client): void
     {
         $this->m_client = $_client;
     }
@@ -28,7 +28,7 @@ trait RequestHandler
     //
     // build a request URL
     //
-    private function build_url($_action, array $_args = null)
+    private function build_url(string $_action, ?array $_args = null): string
     {
         //
         // if there were arguments passed in
@@ -45,7 +45,7 @@ trait RequestHandler
     //
     // make the actual request
     //
-    private function request($_type, $_action, array $_args = null)
+    private function request(string $_type, string $_action, ?array $_args = null): array
     {
         $response = '';
 
@@ -63,10 +63,14 @@ trait RequestHandler
             {
                 curl_setopt($c, CURLOPT_URL, $this->build_url($_action));
                 curl_setopt($c, CURLOPT_POST, true);
-                curl_setopt($c, CURLOPT_HTTPHEADER, array(
+
+                //
+                // build headers
+                //
+                $headers = [
 
                     'Content-type'  => 'application/x-www-form-urlencoded'
-                ));
+                ];
 
                 //
                 // if there are args
@@ -74,7 +78,23 @@ trait RequestHandler
                 if (is_null($_args) == false)
                 {
                     curl_setopt($c, CURLOPT_POSTFIELDS, http_build_query($_args));
+
+                } else
+                {
+                    //
+                    // some versions of CURL apparently set the content-length value to -1 in the event you do a post with no
+                    // POST data, like we do for delete operations.
+                    //  
+                    // I wasn't able to reproduce this issue, but I found some people complaining about the same issue, and it
+                    // should be safe to set this to 0 if there's no data anyway.
+                    //
+                    $headers['Content-Length'] = 0;
                 }
+
+                //
+                // add the custom headers
+                //
+                curl_setopt($c, CURLOPT_HTTPHEADER, $headers);
                 
             } else
             {
@@ -88,7 +108,7 @@ trait RequestHandler
             //
             // add additional custom CURL opts
             //
-            if ( (is_null($this->m_client->m_curl_opts) == false) && (count($this->m_client->m_curl_opts) > 0) )
+            if (count($this->m_client->m_curl_opts) > 0)
             {
                 curl_setopt_array($c, $this->m_client->m_curl_opts);
             }
@@ -106,7 +126,7 @@ trait RequestHandler
             //
             // validate the response data
             //
-            if ( ($response === false) || (strlen($response) == 0) )
+            if ( ($response === false) || (strlen(strval($response)) == 0) )
             {
                 throw new RBLTrackerException('failed to make request to RBLTracker API');
             }
@@ -124,22 +144,23 @@ trait RequestHandler
                 //
                 // build the opts
                 //
-                $opts = array('http' =>
-                    array(
+                $opts = [ 'http' => [
+
                         'method'    => 'POST',
-                        'header'    => array(
+                        'header'    => [
 
                             'Content-type: application/x-www-form-urlencoded',
                             'Authorization: Basic ' . base64_encode($this->m_client->account_sid() . ':' . $this->m_client->api_token())
-                        ),
+                        ],
                         'content'   => (is_null($_args) == true) ? '' : http_build_query($_args),
-                    )
-                );
+                    ]
+                ];
 
                 //
                 // make the request
                 //
                 $response = file_get_contents($this->build_url($_action), false, stream_context_create($opts));
+
                 if ( ($response === false) || (strlen($response) == 0) )
                 {
                     throw new RBLTrackerException('failed to make request to RBLTracker API');
@@ -153,15 +174,15 @@ trait RequestHandler
                 //
                 // build the opts
                 //
-                $opts = array('http' =>
-                    array(
+                $opts = [ 'http' => [
+
                         'method'    => 'GET',
-                        'header'    => array(
+                        'header'    => [
 
                             'Authorization: Basic ' . base64_encode($this->m_client->account_sid() . ':' . $this->m_client->api_token())
-                        )
-                    )
-                );
+                        ]
+                    ]
+                ];
 
                 //
                 // make the request
@@ -177,7 +198,7 @@ trait RequestHandler
         //
         // json decode it
         //
-        $data = json_decode($response, true);
+        $data = json_decode(strval($response), true);
         if (is_null($data) == true)
         {
             throw new RBLTrackerException('failed to decode response from RBLTracker API');
@@ -197,7 +218,7 @@ trait RequestHandler
     //
     // make a get request to the API
     //
-    protected function _get($_action, array $_args = null)
+    protected function _get(string $_action, ?array $_args = null): array
     {
         return $this->request('GET', $_action, $_args);
     }
@@ -205,7 +226,7 @@ trait RequestHandler
     //
     // make a post request to the API
     //
-    protected function _post($_action, array $_args = null)
+    protected function _post(string $_action, ?array $_args = null): array
     {
         return $this->request('POST', $_action, $_args);
     }

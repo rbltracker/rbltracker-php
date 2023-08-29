@@ -1,4 +1,4 @@
-<?
+<?php declare(strict_types=1);
 
 //
 // This file is part of the RBLTracker PHP Wrapper package.
@@ -11,4 +11,4 @@
 
 namespace RBLTracker\Exceptions;
 
-class RBLTrackerException extends \Exception {}
+final class RBLTrackerException extends \Exception {}

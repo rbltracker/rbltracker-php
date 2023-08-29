@@ -1,4 +1,4 @@
-<?php 
+<?php declare(strict_types=1);
 
 //    
 // This file is part of the RBLTracker PHP Wrapper package.
@@ -13,7 +13,7 @@ namespace RBLTracker\API;
 
 use RBLTracker\Exceptions\RBLTrackerException;
 
-class RBL_Profile
+final class RBL_Profile
 {
     use RequestHandler;
 
@@ -28,7 +28,7 @@ class RBL_Profile
     //
     // get a single rbl profile by id
     //
-    public function get($_object_id)
+    public function get(string $_object_id): array
     {
         return $this->_get('rblprofile/' . $_object_id);
     }
@@ -36,7 +36,7 @@ class RBL_Profile
     //
     // create a rbl profile
     //
-    public function add(array $_settings)
+    public function add(array $_settings): array
     {
         return $this->_post('rblprofile/add', $_settings);
     }
@@ -44,7 +44,7 @@ class RBL_Profile
     //
     // update a rbl profile
     //
-    public function update($_object_id, array $_settings)
+    public function update(string $_object_id, array $_settings): array
     {
         return $this->_post('rblprofile/update/' . $_object_id, $_settings);
     }
@@ -52,7 +52,7 @@ class RBL_Profile
     //
     // delete a rbl profile by id
     //
-    public function delete($_object_id)
+    public function delete(string $_object_id): array
     {
         return $this->_post('rblprofile/delete/' . $_object_id);
     }

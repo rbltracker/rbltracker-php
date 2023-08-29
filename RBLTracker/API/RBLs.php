@@ -1,4 +1,4 @@
-<?php 
+<?php declare(strict_types=1);
 
 //    
 // This file is part of the RBLTracker PHP Wrapper package.
@@ -13,7 +13,7 @@ namespace RBLTracker\API;
 
 use RBLTracker\Exceptions\RBLTrackerException;
 
-class RBLs
+final class RBLs
 {
     use RequestHandler;
 
@@ -28,7 +28,7 @@ class RBLs
     //
     // get a list of rbls
     //
-    public function get(array $_settings = null)
+    public function get(?array $_settings = null): array
     {
         return $this->_get('rbls', $_settings);
     }

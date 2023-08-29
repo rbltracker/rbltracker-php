@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 //
 // This file is part of the RBLTracker PHP Wrapper package.
@@ -18,33 +18,33 @@ use RBLTracker\Exceptions\RBLTrackerException;
 //
 spl_autoload_register('RBLTracker\Client::autoload');
 
-class Client
+final class Client
 {
     //
     // PHP SDK version
     //
-    const VERSION = '1.0.2';
+    const VERSION = '1.1.0';
 
     //
     // the API key
     //
-    private $m_account_sid = null;
-    private $m_api_token = null;
+    private ?string $m_account_sid = null;
+    private ?string $m_api_token = null;
 
     //
     // the request URL
     //
-    private $m_url = 'https://rbltracker.com/api/';
+    private string $m_url = 'https://api.rbltracker.com/3.0/';
 
     //
     // additional CURL opts
     //
-    public $m_curl_opts = array();
+    public array $m_curl_opts = [];
 
     //
     // init the object and set the API token
     //
-    public function __construct($_account_sid, $_api_token)
+    public function __construct(string $_account_sid, string $_api_token)
     {
         //
         // validate the key
@@ -65,7 +65,7 @@ class Client
     //
     // autoloader
     //
-    static public function autoload($_name)
+    static public function autoload(string $_name): void
     {
         if (strncmp($_name, 'RBLTracker', 10) == 0)
         {
@@ -76,7 +76,7 @@ class Client
     //
     // get/set internal values
     //
-    public function account_sid($_account_sid = null)
+    public function account_sid(?string $_account_sid = null): mixed
     {
         if (is_null($_account_sid) == true)
         {
@@ -85,8 +85,10 @@ class Client
         {
             $this->m_account_sid = $_account_sid;
         }
+
+        return null;
     }
-    public function api_token($_api_token = null)
+    public function api_token(?string $_api_token = null): mixed
     {
         if (is_null($_api_token) == true)
         {
@@ -95,8 +97,10 @@ class Client
         {
             $this->m_api_token = $_api_token;
         }
+
+        return null;
     }
-    public function url($_url = null)
+    public function url(?string $_url = null): mixed
     {
         if (is_null($_url) == true)
         {
@@ -105,12 +109,14 @@ class Client
         {
             $this->m_url = $_url;
         }
+
+        return null;
     }
 
     //
     // here to support adding additional custom curl opts
     //
-    public function curl_opts(array $_opts = null)
+    public function curl_opts(?array $_opts = null): void
     {
         $this->m_curl_opts = $_opts;
     }
@@ -118,7 +124,7 @@ class Client
     //
     // call a resouce by name
     //
-    public function __get($_name)
+    public function __get(string $_name): mixed
     {
         $method = 'get_' . strtolower($_name);
 
@@ -133,7 +139,7 @@ class Client
     //
     // return a listings object- just a host list
     //
-    public function get_listings()
+    public function get_listings(): API\Listings
     {
         return new API\Listings($this);
     }
@@ -141,11 +147,11 @@ class Client
     //
     // return a host or hosts object
     //
-    public function get_host()
+    public function get_host(): API\Host
     {
         return new API\Host($this);
     }
-    public function get_hosts()
+    public function get_hosts(): API\Hosts
     {
         return new API\Hosts($this);
     }
@@ -153,11 +159,11 @@ class Client
     //
     // return a contact or contacts object
     //
-    public function get_contact()
+    public function get_contact(): API\Contact
     {
         return new API\Contact($this);
     }
-    public function get_contacts()
+    public function get_contacts(): API\Contacts
     {
         return new API\Contacts($this);
     }
@@ -165,35 +171,47 @@ class Client
     //
     // return a rbl or rbls object
     //
-    public function get_rbl()
+    public function get_rbl(): API\RBL
     {
         return new API\RBL($this);
     }
-    public function get_rbls()
+    public function get_rbls(): API\RBLs
     {
         return new API\RBLs($this);
     }
 
     //
-    // rbl profiles
+    // rbl profiles - this is being phased out
     //
-    public function get_rbl_profile()
+    public function get_rbl_profile(): API\RBL_Profile
     {
         return new API\RBL_Profile($this);
     }
-    public function get_rbl_profiles()
+    public function get_rbl_profiles(): API\RBL_Profiles
     {
         return new API\RBL_Profiles($this);
     }
 
     //
+    // monitoring profiles
+    //
+    public function get_monitoring_profile(): API\Monitoring_Profile
+    {
+        return new API\Monitoring_Profile($this);
+    }
+    public function get_monitoring_profiles(): API\Monitoring_Profiles
+    {
+        return new API\Monitoring_Profiles($this);
+    }
+
+    //
     // contact groups
     //
-    public function get_contact_group()
+    public function get_contact_group(): API\Contact_Group
     {
         return new API\Contact_Group($this);
     }
-    public function get_contact_groups()
+    public function get_contact_groups(): API\Contact_Groups
     {
         return new API\Contact_Groups($this);
     }
@@ -201,8 +219,16 @@ class Client
     //
     // return a new check object
     //
-    public function get_check()
+    public function get_check(): API\Check
     {
         return new API\Check($this);
+    }
+
+    //
+    // ACLs
+    //
+    public function get_acls(): API\ACLs
+    {
+        return new API\ACLs($this);
     }
 }

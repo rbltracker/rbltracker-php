@@ -13,7 +13,7 @@ namespace RBLTracker\API;
 
 use RBLTracker\Exceptions\RBLTrackerException;
 
-final class RBL_Profiles
+final class Monitoring_Profiles
 {
     use RequestHandler;
 
@@ -26,10 +26,10 @@ final class RBL_Profiles
     }
 
     //
-    // get a list of rbl profiles
+    // get a list of monitoring profiles
     //
     public function get(?array $_settings = null): array
     {
-        return $this->_get('rblprofiles', $_settings);
+        return $this->_get('monitoringprofiles', $_settings);
     }
 }

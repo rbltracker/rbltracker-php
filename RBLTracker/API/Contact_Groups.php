@@ -1,4 +1,4 @@
-<?php 
+<?php declare(strict_types=1);
 
 //    
 // This file is part of the RBLTracker PHP Wrapper package.
@@ -13,7 +13,7 @@ namespace RBLTracker\API;
 
 use RBLTracker\Exceptions\RBLTrackerException;
 
-class Contact_Groups
+final class Contact_Groups
 {
     use RequestHandler;
 
@@ -28,7 +28,7 @@ class Contact_Groups
     //
     // get a list of contact groups
     //
-    public function get(array $_settings = null)
+    public function get(?array $_settings = null): array
     {
         return $this->_get('contactgroups', $_settings);
     }

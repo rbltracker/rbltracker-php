@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 //
 // This file is part of the RBLTracker PHP Wrapper package.
@@ -13,7 +13,7 @@ namespace RBLTracker\API;
 
 use RBLTracker\Exceptions\RBLTrackerException;
 
-class Check
+final class Check
 {
     use RequestHandler;
 
@@ -28,7 +28,7 @@ class Check
     //
     // start a new check request
     //
-    public function start(array $_settings)
+    public function start(array $_settings): array
     {
         return $this->_post('check/start', $_settings);
     }
@@ -36,7 +36,7 @@ class Check
     //
     // get the current status of the check
     //
-    public function status($_object_id, array $_args = null)
+    public function status(string $_object_id, ?array $_args = null): array
     {
         return $this->_get('check/status/' . $_object_id, $_args);
     }

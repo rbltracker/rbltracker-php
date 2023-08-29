@@ -1,4 +1,4 @@
-<?php 
+<?php declare(strict_types=1);
 
 //    
 // This file is part of the RBLTracker PHP Wrapper package.
@@ -13,7 +13,7 @@ namespace RBLTracker\API;
 
 use RBLTracker\Exceptions\RBLTrackerException;
 
-class Contact
+final class Contact
 {
     use RequestHandler;
 
@@ -28,7 +28,7 @@ class Contact
     //
     // get a single contact by id
     //
-    public function get($_object_id)
+    public function get(string $_object_id): array
     {
         return $this->_get('contact/' . $_object_id);
     }
@@ -36,7 +36,7 @@ class Contact
     //
     // create a contact
     //
-    public function add(array $_settings)
+    public function add(array $_settings): array
     {
         return $this->_post('contact/add', $_settings);
     }
@@ -44,7 +44,7 @@ class Contact
     //
     // update a contact
     //
-    public function update($_object_id, array $_settings)
+    public function update(string $_object_id, array $_settings): array
     {
         return $this->_post('contact/update/' . $_object_id, $_settings);
     }
@@ -52,7 +52,7 @@ class Contact
     //
     // delete a contact by id
     //
-    public function delete($_object_id)
+    public function delete(string $_object_id): array
     {
         return $this->_post('contact/delete/' . $_object_id);
     }
@@ -60,7 +60,7 @@ class Contact
     //
     // pause a contact by id
     //
-    public function pause($_object_id)
+    public function pause(string $_object_id): array
     {
         return $this->_post('contact/pause/' . $_object_id);
     }
@@ -68,7 +68,7 @@ class Contact
     //
     // resume (un-pause) a contact by id
     //
-    public function resume($_object_id)
+    public function resume(string $_object_id): array
     {
         return $this->_post('contact/resume/' . $_object_id);
     }
@@ -76,7 +76,7 @@ class Contact
     //
     // resend and authorization code for a contact by id
     //
-    public function resend($_object_id)
+    public function resend(string $_object_id): array
     {
         return $this->_post('contact/resend/' . $_object_id);
     }
@@ -84,7 +84,7 @@ class Contact
     //
     // confirm a contact by id
     //
-    public function confirm($_object_id, $_auth_code)
+    public function confirm(string $_object_id, string $_auth_code): array
     {
         return $this->_post('contact/confirm/' . $_object_id, array('authcode' => $_auth_code));
     }

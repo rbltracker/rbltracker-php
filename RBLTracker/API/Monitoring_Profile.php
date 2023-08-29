@@ -13,7 +13,7 @@ namespace RBLTracker\API;
 
 use RBLTracker\Exceptions\RBLTrackerException;
 
-final class Contact_Group
+final class Monitoring_Profile
 {
     use RequestHandler;
 
@@ -26,34 +26,34 @@ final class Contact_Group
     }
 
     //
-    // get a single contact group by id
+    // get a single monitoring profile by id
     //
     public function get(string $_object_id): array
     {
-        return $this->_get('contactgroup/' . $_object_id);
+        return $this->_get('monitoringprofile/' . $_object_id);
     }
 
     //
-    // create a contact group
+    // create a monitoring profile
     //
     public function add(array $_settings): array
     {
-        return $this->_post('contactgroup/add', $_settings);
+        return $this->_post('monitoringprofile/add', $_settings);
     }
 
     //
-    // update a contact group
+    // update a monitoring profile
     //
     public function update(string $_object_id, array $_settings): array
     {
-        return $this->_post('contactgroup/update/' . $_object_id, $_settings);
+        return $this->_post('monitoringprofile/update/' . $_object_id, $_settings);
     }
 
     //
-    // delete a contact group by id
+    // delete a monitoring profile by id
     //
     public function delete(string $_object_id): array
     {
-        return $this->_post('contactgroup/delete/' . $_object_id);
+        return $this->_post('monitoringprofile/delete/' . $_object_id);
     }
 }

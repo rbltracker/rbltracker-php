@@ -1,4 +1,9 @@
-<a href="https://rbltracker.com" target="_blank"><img src="https://rbltracker.com/portal/static/3.4/images/rbl_logo_front.png"/></a>
+<a href="https://rbltracker.com" target="_blank">
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://portal.rbltracker.com/assets/3.14/images/rbltracker_logo_dark.svg" width="400">
+        <img src="https://portal.rbltracker.com/assets/3.14/images/rbltracker_logo_light.svg" width="400">
+    </picture>
+</a>
 
 [Sign up][rbltracker sign up] for a RBLTracker account and visit our [developer site][rbltracker dev site] for even more details.
 
@@ -10,9 +15,9 @@ The official PHP binding for your RBLTracker service.
 
 Before using this library, you must have:
 
-* A RBLTracker Account, [sign up for a new account][rbltracker sign up] or [login to RBLTracker](https://rbltracker.com/portal/login/)
-* a valid RBLTracker account SID and auth token, available from the [RBLTracker Portal](https://rbltracker.com/portal/login/)
-* PHP >= 5.4
+* A RBLTracker Account, [sign up for a new account][rbltracker sign up] or [login to RBLTracker](https://portal.rbltracker.com/login/)
+* a valid RBLTracker account SID and auth token, available from the [RBLTracker Portal](https://portal.rbltracker.com/login/)
+* PHP >= 7.4
 * The PHP JSON extension
 
 ## Installation
@@ -32,7 +37,7 @@ $client = new RBLTracker\Client('your_account_sid', 'your_auth_token');
 
 try
 {
-    $hosts = $client->hosts->get(array('page_size' => 5, 'page' => 2));
+    $hosts = $client->hosts->get([ 'page_size' => 5, 'page' => 2 ]);
 
     print_r($hosts);
 
@@ -94,16 +99,22 @@ Full API documentation is available from the [RBLTracker developer site.][rbltra
 
 ## Release History
 
+### v1.1.0
+* updated to the use the new API endpoint URL
+* added strict type requirements; bumped minimum version to PHP 7.4
+* added support for Monitoring Profiles, moving away from RBL Profiles
+* added support for the ACLs endpoint to pull the list of DNS servers used for checks
+
 ### v1.0.2
 * updated to support the RBLTracker API v3.6
-* added manual RBL check support.
-* refactored the code layout to make it easier to override the URL for testing.
+* added manual RBL check support
+* refactored the code layout to make it easier to override the URL for testing
 
 ### v1.0.1
-* updated to support the RBLTracker API v3.4.
+* updated to support the RBLTracker API v3.4
 
 ### v1.0.0
-* Initial release.
+* Initial release
 
-[rbltracker sign up]:   https://rbltracker.com/portal/signup/
+[rbltracker sign up]:   https://portal.rbltracker.com/signup/
 [rbltracker dev site]:  https://rbltracker.com/docs/api/
