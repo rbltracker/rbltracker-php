@@ -46,7 +46,6 @@ try
     echo $e->getMessage();
 }
 
-?>
 ```
 
 That will output a PHP array that looks like this:
@@ -104,6 +103,11 @@ Full API documentation is available from the [RBLTracker developer site.][rbltra
 * added strict type requirements; bumped minimum version to PHP 7.4
 * added support for Monitoring Profiles, moving away from RBL Profiles
 * added support for the ACLs endpoint to pull the list of DNS servers used for checks
+
+### v1.0.3
+* fixed a typo in RBLTrackerException.php where it was using short open tags.
+* changed array() instances to [].
+* updated classes to use the final keyword.
 
 ### v1.0.2
 * updated to support the RBLTracker API v3.6

@@ -86,6 +86,6 @@ final class Contact
     //
     public function confirm(string $_object_id, string $_auth_code): array
     {
-        return $this->_post('contact/confirm/' . $_object_id, array('authcode' => $_auth_code));
+        return $this->_post('contact/confirm/' . $_object_id, [ 'authcode' => $_auth_code ]);
     }
 }

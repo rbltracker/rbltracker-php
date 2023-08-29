@@ -188,6 +188,7 @@ trait RequestHandler
                 // make the request
                 //
                 $response = file_get_contents($this->build_url($_action, $_args), false, stream_context_create($opts));
+
                 if ( ($response === false) || (strlen($response) == 0) )
                 {
                     throw new RBLTrackerException('failed to make request to RBLTracker API');
