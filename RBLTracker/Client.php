@@ -23,7 +23,7 @@ final class Client
     //
     // PHP SDK version
     //
-    const VERSION = '1.1.0';
+    public const VERSION = '1.1.0';
 
     //
     // the API key
