@@ -23,7 +23,7 @@ final class Client
     //
     // PHP SDK version
     //
-    const VERSION = '1.0.3';
+    const VERSION = '1.0.4';
 
     //
     // the API key
@@ -34,7 +34,7 @@ final class Client
     //
     // the request URL
     //
-    private $m_url = 'https://rbltracker.com/api/';
+    private $m_url = 'https://api.rbltracker.com/3.0/';
 
     //
     // additional CURL opts
