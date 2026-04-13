@@ -1,3 +1,13 @@
+> [!WARNING]
+> ## This repository has moved!
+>
+> **rbltracker/rbltracker-php** is no longer maintained. The project has moved to a new home under Generator Labs:
+>
+> ### ➡️ [generator-labs/php-sdk](https://github.com/generator-labs/php-sdk)
+>
+> Please update your bookmarks, forks, and any references. All future development,
+> issues, and releases will happen in the new repository.
+
 <a href="https://rbltracker.com" target="_blank">
     <picture>
         <source media="(prefers-color-scheme: dark)" srcset="https://portal.rbltracker.com/assets/3.14/images/rbltracker_logo_dark.svg" width="400">
